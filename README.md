@@ -9,7 +9,11 @@ They proposed **palette-based photo recoloring** method for image editing.
 I will implement automatic color palette selection part for a single image.
 
 ## Result
-*Status*: Under construction.
+This program can generate color palettes for the target images.
+![apple_0](palette/results/apple_0.png)
+![flower_0](palette/results/flower_0.png)
+![flower_2](palette/results/flower_2.png)
+![tulip_1](palette/results/tulip_1.png)
 
 ## Installation
 
@@ -32,10 +36,26 @@ This program also uses **docopt** for CLI.
 **docopt** will be installed automatically through the following **pip** command for main modules.
 
 ### Install main modules
-*Status*: Under construction.
+You can use **pip** command for installing main modules.
+Please run the following command from the shell.
+
+``` bash
+  > pip install git+https://github.com/tody411/PaletteSelection.git
+```
 
 ## Usage
-*Status*: Under construction.
+### Package Structure
+* palette: Main package.
+    - main.py: Main module for testing.
+* results: Result images will be saved in the directory.
+
+### Test Palette Selection Demo
+You can test the Palette Selection with the following command from ```palette``` directory.
+``` bash
+  > python main.py
+```
+
+This command will start downloading test images via Google Image API then run the Palette Selection module to generate result images.
 
 <!-- ## API Document
 
@@ -50,7 +70,7 @@ For a local copy, please use the following doxygen command from *doxygen* direct
 
 ## Future tasks
 
-* [ ] Complete implementation.
+* [ ] Compare the palette selection results depending on the target color space.
 
 ## License
 

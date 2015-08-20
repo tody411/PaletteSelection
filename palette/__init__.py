@@ -7,5 +7,5 @@
 #  @date        2015/08/20
 
 __author__ = 'tody'
-__version__ = '0.1'
+__version__ = '0.5'
 __license__ = 'MIT'

@@ -10,7 +10,7 @@ import numpy as np
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
 
-from palette.cv.image import to32F, rgb
+from palette.cv.image import to32F, rgb, hsv2rgb, Lab2rgb
 from palette.datasets.google_image import loadData
 
 
@@ -21,10 +21,11 @@ class Hist3D:
     #  @param num_bins       target number of histogram bins.
     #  @param alpha          low density clip.
     def __init__(self, image,
-                 num_bins=16, alpha=0.3):
+                 num_bins=16, alpha=0.3, color_space="rgb"):
         self._pixels = self.toPixels(image)
         self._num_bins = num_bins
         self._alpha = alpha
+        self._color_space = color_space
 
         self.computeColorRanges()
         self.computeHistogram()
@@ -69,31 +70,46 @@ class Hist3D:
     def colorIDs(self):
         density_mean = np.mean(self._hist_bins)
         color_ids = np.where(self._hist_bins > density_mean * self._alpha)
-        return np.array(color_ids).T
+        return color_ids
 
     def colorSamples(self):
         color_ids = self.colorIDs()
+        color_ids = np.array(color_ids).T
+        print color_ids.shape
 
         num_bins = self._num_bins
         c_min, c_max = self._color_ranges
-        color_samples = c_min + (color_ids / (c_max - c_min)) / (num_bins - 1.0)
-        color_samples = np.clip(color_samples, 0.0, 1.0)
+        color_samples = c_min + (color_ids * (c_max - c_min)) / float(num_bins - 1.0)
+
         return color_samples
 
     def colorDensities(self):
-        color_densities = np.float32(self._hist_bins[self.colorIDs().T])
+        color_densities = np.float32(self._hist_bins[self.colorIDs()])
+
         density_max = np.max(color_densities)
         color_densities = color_densities / density_max
 
         return color_densities
 
+    def rgbColors(self):
+        color_samples = self.colorSamples()
+        colors = color_samples
+        if self._color_space == "Lab":
+            colors = Lab2rgb(np.float32(color_samples.reshape(1, -1, 3))).reshape(-1, 3)
+
+        colors = np.clip(colors, 0.0, 1.0)
+        return colors
+
+    def colorRanges(self):
+        return self._color_ranges
+
     def plotColorSamples(self, plt):
-        color_ids = self.colorIDs()
         color_samples = self.colorSamples()
         density_size = self.plotDensitySize()
+        colors = self.rgbColors()
 
-        plt.scatter(color_ids[:, 0], color_ids[:, 1], color_ids[:, 2],
-                    color=color_samples, s=density_size)
+        plt.scatter(color_samples[:, 0], color_samples[:, 1], color_samples[:, 2],
+                    color=colors, s=density_size)
 
     def plotDensitySize(self):
         color_densities = self.colorDensities()
@@ -102,7 +118,7 @@ class Hist3D:
 
 
 if __name__ == '__main__':
-    C_8U = loadData(data_name="banana", i=3)
+    C_8U = loadData(data_name="tulip", data_id=0)
     rgb_8U = rgb(C_8U)
     C_32F = to32F(rgb_8U)
 
