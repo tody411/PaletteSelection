@@ -14,7 +14,7 @@ setup(
         description = 'Simple python demos of Automatic Color Palette Selection [Garcia-Dorado et al. 2015].',
         license = __license__,
         author = __author__,
-        url = 'https://github.com/tody411/SOM-ColorManifolds.git',
+        url = 'https://github.com/tody411/PaletteSelection.git',
         packages = find_packages(),
         install_requires = ['docopt'],
         )
