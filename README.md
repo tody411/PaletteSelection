@@ -9,7 +9,7 @@ They proposed **palette-based photo recoloring** method for image editing.
 I will implement automatic color palette selection part for a single image.
 
 ## Result
-This program can generate color palettes for the target images.
+This program can generate the following color palettes from the target images.
 ![apple_0](palette/results/apple_0.png)
 ![flower_0](palette/results/flower_0.png)
 ![flower_2](palette/results/flower_2.png)
