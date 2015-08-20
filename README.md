@@ -47,7 +47,7 @@ Please run the following command from the shell.
 ### Package Structure
 * palette: Main package.
     - main.py: Main module for testing.
-* results: Result images will be saved in the directory.
+    - results: Result images will be saved in the directory.
 
 ### Test Palette Selection Demo
 You can test the Palette Selection with the following command from ```palette``` directory.
