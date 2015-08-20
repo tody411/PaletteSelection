@@ -32,8 +32,8 @@ Please install the following required python modules.
 As these modules are heavily dependent on NumPy modules, please install appropriate packages for your development environment (Python versions, 32-bit or 64-bit).
 For 64-bit Windows, you can download the binaries from [**Unofficial Windows Binaries for Python Extension Packages**](http://www.lfd.uci.edu/~gohlke/pythonlibs/).
 
-This program also uses **docopt** for CLI.
-**docopt** will be installed automatically through the following **pip** command for main modules.
+<!-- This program also uses **docopt** for CLI.
+**docopt** will be installed automatically through the following **pip** command for main modules. -->
 
 ### Install main modules
 You can use **pip** command for installing main modules.
