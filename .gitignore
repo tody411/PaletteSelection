@@ -55,6 +55,4 @@ Temporary Items
 *.sublime-workspace
 
 # Datasets
-som_cm/datasets/*/*
-som_cm/.cache/upload.wikimedia.org,wikipedia,commons,1,16,Appearance_of_sky_for_weather_forecast,_Dhaka,_Bangladesh.JPG,ae15a512375eebea0c35bc2d07302fb3
-palette/datasets/.cache/7-themes.com,data_images,out,46,6928912-purple-cosmos-flower.jpg,618129d169b6ad3469a88083299c908a
+palette/datasets/*/*
