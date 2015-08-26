@@ -56,3 +56,4 @@ Temporary Items
 
 # Datasets
 palette/datasets/*/*
+palette/.cache/*

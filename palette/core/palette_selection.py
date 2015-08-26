@@ -26,7 +26,7 @@ class PaletteSelection:
     ## Constructor
     #  @param color_samples     input color samples.
     #  @param color_densities   color densities (normalized frequencies).
-    def __init__(self, color_samples, color_densities, num_colors=7, sigma=80.0, color_space="rgb"):
+    def __init__(self, color_samples, color_densities, num_colors=7, sigma=70.0, color_space="rgb"):
         self._color_samples = color_samples
         self._color_densities = color_densities
         self._num_colors = num_colors
@@ -114,7 +114,9 @@ def runPaletteSelectionResult(image_file):
     plt.imshow(C_32F)
     plt.axis('off')
 
-    hist3d = Hist3D(Lab_32F, num_bins=16, color_space="Lab")
+    color_space = "rgb"
+
+    hist3d = Hist3D(C_32F, num_bins=16, color_space=color_space)
     color_samples = hist3d.colorSamples()
 
     color_densities = hist3d.colorDensities()
@@ -123,7 +125,7 @@ def runPaletteSelectionResult(image_file):
     plt.title("3D Color Histogram")
     hist3d.plotColorSamples(ax)
 
-    palette_selection = PaletteSelection(color_samples, color_densities, color_space="Lab")
+    palette_selection = PaletteSelection(color_samples, color_densities, color_space=color_space)
     palette_selection.compute()
 
     plt.subplot(222)
@@ -147,7 +149,8 @@ def runPaletteSelectionResults(data_names, data_ids):
 
 if __name__ == '__main__':
     data_names = ["apple", "tulip", "flower"]
-    data_ids = [0, 1, 2]
+    data_names = ["mip"]
+    data_ids = [0, 1, 2, 3]
 
     runPaletteSelectionResults(data_names, data_ids)
 
