@@ -8,16 +8,7 @@
 import os
 import numpy as np
 from mpl_toolkits.mplot3d import Axes3D
-import matplotlib.pyplot as plt
-import matplotlib.animation as animation
-import cv2
 
-from palette.datasets.google_image import dataFile
-from palette.cv.image import to32F, rgb2Lab, Lab2rgb
-from palette.io_util.image import loadRGB
-from palette.plot.window import showMaximize
-from palette.results.results import resultFile
-from palette.core.color_samples import Hist3D
 from palette.np.norm import normVectors
 
 

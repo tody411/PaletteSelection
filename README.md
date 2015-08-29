@@ -6,7 +6,14 @@ Simple python demos of Automatic Color Palette Selection [Garcia-Dorado et al. 2
 
 They proposed **palette-based photo recoloring** method for image editing.
 
-I will implement automatic color palette selection part for a single image.
+This package includes:
+
+* ColorPixels class: [```palette/core/color_pixels.py```](palette/core/color_pixels.py).
+    - Compute RGB, Lab, HSV color pixels from image.
+* Hist3D class: [```palette/core/hist_3d.py```](palette/core/hist_3d.py).
+    - Compute 3D color histogram for the target color space.
+* PaletteSelection class: [```palette/core/palette_selection.py```](palette/core/palette_selection.py).
+    - Select palette colors from Hist3D output.
 
 ## Examples
 
