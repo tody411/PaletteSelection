@@ -1,6 +1,6 @@
 
 # -*- coding: utf-8 -*-
-## @package color_histogram.core.hist_3d
+## @package palette.core.hist_3d
 #
 #  Implementation of 3D color histograms.
 #  @author      tody

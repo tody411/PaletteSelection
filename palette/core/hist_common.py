@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-## @package color_histogram.core.hist_common
+## @package palette.core.hist_common
 #
 #  Common color histogram functions for 1D, 2D, 3D.
 #  @author      tody
