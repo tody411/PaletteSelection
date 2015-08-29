@@ -6,6 +6,8 @@ Simple python demos of Automatic Color Palette Selection [Garcia-Dorado et al. 2
 
 They proposed **palette-based photo recoloring** method for image editing.
 
+I will implement automatic color palette selection part for single and multi-images.
+
 This package includes:
 
 * ColorPixels class: [```palette/core/color_pixels.py```](palette/core/color_pixels.py).
