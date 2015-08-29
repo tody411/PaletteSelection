@@ -8,12 +8,62 @@ They proposed **palette-based photo recoloring** method for image editing.
 
 I will implement automatic color palette selection part for a single image.
 
-## Result
-This program can generate the following color palettes from the target images.
-![apple_0](palette/results/apple_0.png)
-![flower_0](palette/results/flower_0.png)
-![flower_2](palette/results/flower_2.png)
-![tulip_1](palette/results/tulip_1.png)
+## Examples
+
+### Palette Selection for Single Image:
+
+#### Minimal example:
+
+``` python
+from palette.io_util.image import loadRGB
+from palette.core.hist_3d import Hist3D
+from palette.core.palette_selection import PaletteSelection
+import matplotlib.pyplot as plt
+
+# Load image.
+image = loadRGB(image_file)
+
+# 16 bins, Lab color space
+hist3D = Hist3D(image, num_bins=16, color_space='Lab')
+
+color_coordinates = hist3D.colorCoordinates()
+color_densities = hist3D.colorDensities()
+rgb_colors = hist3D.rgbColors()
+
+# 5 colors from Lab color samples.
+palette_selection = PaletteSelection(color_coordinates,
+                                             color_densities, rgb_colors,
+                                             num_colors=5, sigma=70.0)
+
+fig = plt.figure()
+
+# Plot image.
+fig.add_subplot(131)
+plt.imshow(image)
+plt.axis('off')
+
+# Plot palette colors.
+fig.add_subplot(132)
+palette_selection.plot(plt)
+plt.axis('off')
+
+# Plot 3D color histogram.
+ax = fig.add_subplot(133, projection='3d')
+hist3D.plot(ax)
+
+plt.show()
+
+```
+
+In the following demo, I compare the palette selection results by changing ```color_space```.
+
+![Demo for single image](palette/results/flower_0_single.png)
+
+### Palette Selection for Multi-Images:
+
+In the following demo, I test the palette selection for multi-images.
+
+![Demo for multi-images](palette/results/tulip_multi.png)
 
 ## Installation
 
@@ -44,18 +94,20 @@ Please run the following command from the shell.
 ```
 
 ## Usage
-### Package Structure
-* palette: Main package.
-    - main.py: Main module for testing.
-    - results: Result images will be saved in the directory.
+### Run Palette Selection Demo
 
-### Test Palette Selection Demo
+* [```palette/main.py```](palette/main.py):
+
 You can test the Palette Selection with the following command from ```palette``` directory.
 ``` bash
   > python main.py
 ```
 
-This command will start downloading test images via Google Image API then run the Palette Selection module to generate result images.
+This command will start downloading test images via Google Image API then run the demo module to generate result images.
+
+### Examples Codes
+* [```palette/examples```](palette/examples): You can find minimal example codes.
+* [```palette/results```](palette/results): You can also find examples codes to generate result images.
 
 <!-- ## API Document
 
@@ -68,9 +120,9 @@ For a local copy, please use the following doxygen command from *doxygen* direct
   > doxygen doxygen_config
 ``` -->
 
-## Future tasks
+<!-- ## Future tasks
 
-* [ ] Compare the palette selection results depending on the target color space.
+* [ ] Compare the palette selection results depending on the target color space. -->
 
 ## License
 
