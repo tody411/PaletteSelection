@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ## @package palette.results.multi_images
 #
-#  Palette selection demo for multi images.
+#  Demo for multi-images.
 #  @author      tody
 #  @date        2015/08/29
 
@@ -19,7 +19,7 @@ from palette.plot.window import showMaximize
 
 
 ## Compute palette selection result for the image file.
-def paletteSelectionDataGroupMulti(data_name, data_ids):
+def multiImagesResult(data_name, data_ids):
 
     num_cols = len(data_ids)
     num_rows = 2
@@ -52,7 +52,7 @@ def paletteSelectionDataGroupMulti(data_name, data_ids):
     plot_id = num_rows * 100 + 10 * num_cols + num_cols + 2
 
     rgb_pixels = np.array(rgb_pixels)
-    print rgb_pixels.shape
+
     multi_image = np.array(rgb_pixels).reshape(1, -1, 3)
 
     hist3D = Hist3D(multi_image, num_bins=16, color_space=color_space)
@@ -80,11 +80,11 @@ def paletteSelectionDataGroupMulti(data_name, data_ids):
 
 
 ## Compute palette selection results for the given data names, ids.
-def paletteSelectionResultsMulti(data_names, data_ids):
-    batchDataGroup(data_names, data_ids, paletteSelectionDataGroupMulti, "Palette Selection (multi images)")
+def multiImagesResults(data_names, data_ids):
+    batchDataGroup(data_names, data_ids, multiImagesResult, "Palette Selection (multi images)")
 
 if __name__ == '__main__':
     data_names = ["apple", "flower", "tulip"]
     data_ids = [0, 1, 2]
 
-    paletteSelectionResultsMulti(data_names, data_ids)
+    multiImagesResults(data_names, data_ids)

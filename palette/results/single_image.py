@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ## @package palette.results.single_image
 #
-#  Palette selection demo for single image.
+#  Demo for single image.
 #  @author      tody
 #  @date        2015/08/29
 
@@ -17,7 +17,7 @@ from palette.plot.window import showMaximize
 
 
 ## Compute palette selection result for the image file.
-def paletteSelectionResult(image_file):
+def singleImageResult(image_file):
     image_name = os.path.basename(image_file)
     image_name = os.path.splitext(image_name)[0]
 
@@ -70,12 +70,12 @@ def paletteSelectionResult(image_file):
 
 
 ## Compute palette selection results for the given data names, ids.
-def paletteSelectionResults(data_names, data_ids):
-    batchResults(data_names, data_ids, paletteSelectionResult, "Palette Selection (single image)")
+def signleImageResults(data_names, data_ids):
+    batchResults(data_names, data_ids, singleImageResult, "Palette Selection (single image)")
 
 if __name__ == '__main__':
     data_names = ["apple", "flower", "tulip"]
     data_ids = [0, 1, 2]
 
-    paletteSelectionResults(data_names, data_ids)
+    signleImageResults(data_names, data_ids)
 
