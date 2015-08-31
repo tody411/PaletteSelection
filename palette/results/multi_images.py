@@ -18,7 +18,7 @@ from palette.core.palette_selection import PaletteSelection
 from palette.plot.window import showMaximize
 
 
-## Compute palette selection result for the image file.
+## Demo for the given data group.
 def multiImagesResult(data_name, data_ids):
 
     num_cols = len(data_ids)
@@ -79,7 +79,7 @@ def multiImagesResult(data_name, data_ids):
     plt.savefig(result_file)
 
 
-## Compute palette selection results for the given data names, ids.
+## Demo for the given data names, ids.
 def multiImagesResults(data_names, data_ids):
     batchDataGroup(data_names, data_ids, multiImagesResult, "Palette Selection (multi images)")
 

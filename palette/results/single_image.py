@@ -16,7 +16,7 @@ from palette.core.palette_selection import PaletteSelection
 from palette.plot.window import showMaximize
 
 
-## Compute palette selection result for the image file.
+## Demo for the single image file.
 def singleImageResult(image_file):
     image_name = os.path.basename(image_file)
     image_name = os.path.splitext(image_name)[0]
@@ -69,7 +69,7 @@ def singleImageResult(image_file):
     #showMaximize()
 
 
-## Compute palette selection results for the given data names, ids.
+## Demo for the given data names, ids.
 def signleImageResults(data_names, data_ids):
     batchResults(data_names, data_ids, singleImageResult, "Palette Selection (single image)")
 
