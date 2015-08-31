@@ -57,3 +57,7 @@ Temporary Items
 # Datasets
 palette/datasets/*/*
 palette/.cache/*
+
+# Doxygen directory
+doxygen/api_doc/*
+doxygen/*.bat

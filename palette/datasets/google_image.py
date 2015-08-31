@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-## @package som_cm.datasets.google_image
+## @package palette.datasets.google_image
 #
 #  Image datasets via Google Image API.
 #  createDatasets function will create datasets

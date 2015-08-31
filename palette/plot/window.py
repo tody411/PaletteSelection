@@ -1,6 +1,5 @@
-
 # -*- coding: utf-8 -*-
-## @package som_cm.plot.window
+## @package palette.plot.window
 #
 #  Matplot window functions.
 #  @author      tody
