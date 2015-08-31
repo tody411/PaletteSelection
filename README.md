@@ -116,7 +116,7 @@ This command will start downloading test images via Google Image API then run th
 
 ### Examples Codes
 * [```palette/examples```](palette/examples): You can find minimal example codes.
-* [```palette/results```](palette/results): You can also find examples codes to generate result images.
+* [```palette/results```](palette/results): You can also find example codes to generate result images.
 
 <!-- ## API Document
 
