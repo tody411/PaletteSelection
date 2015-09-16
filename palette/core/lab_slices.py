@@ -7,16 +7,16 @@
 #  @date        2015/09/15
 
 import numpy as np
-import cv2
 import matplotlib.pyplot as plt
-import matplotlib.animation as animation
+
 from palette.cv.image import Lab2rgb
-from palette.plot.window import showMaximize
 
 
 ## OpenCV implementation of Lab2rgb
 def Lab2rgb_cv(img):
-    return Lab2rgb(img)
+    h, w = img.shape[:2]
+    mask = 255 * np.ones((h, w), dtype=np.uint8)
+    return Lab2rgb(img), mask
 
 
 ## Simple python implementation of Lab2rgb.
@@ -56,14 +56,17 @@ def xyz2rgb(XYZ):
     RGB[:, :, 2] = 0.0556 * XYZ[:, :, 0] - 0.2040 * XYZ[:, :, 1] + 1.0570 * XYZ[:, :, 2]
 
     R, G, B = RGB[:, :, 0], RGB[:, :, 1], RGB[:, :, 2]
-    RGB[R < 0.0, :] = 0.0
-    RGB[G < 0.0, :] = 0.0
-    RGB[B < 0.0, :] = 0.0
-    RGB[R > 1.0, :] = 0.0
-    RGB[G > 1.0, :] = 0.0
-    RGB[B > 1.0, :] = 0.0
+    mask = 255 * np.ones((R.shape), dtype=np.uint8)
+    mask[R < 0.0] = 0
+    mask[G < 0.0] = 0
+    mask[B < 0.0] = 0
+    mask[R > 1.0] = 0
+    mask[G > 1.0] = 0
+    mask[B > 1.0] = 0
 
-    return RGB
+    RGB[mask == 0, :] = 0.0
+
+    return RGB, mask
 
 
 ## Implementation of Lab slice.
@@ -93,6 +96,7 @@ class LabSlice:
     def bRange(self):
         return self._b_range
 
+    ## Return ab slice with mask.
     def slice(self, L):
         size = self._size
         slice_Lab = np.zeros((size, size, 3), dtype=np.float32)
@@ -101,8 +105,17 @@ class LabSlice:
         slice_Lab[:, :, 1] = self._a_grid
         slice_Lab[:, :, 2] = self._b_grid
 
-        slice_rgb = self._func(slice_Lab)
-        return slice_rgb
+        slice_rgb, mask = self._func(slice_Lab)
+        return slice_rgb, mask
+
+    ## Return xy coordinates for the given ab.
+    def ab2xy(self, ab):
+        a_min, a_max = self._a_range
+        b_min, b_max = self._b_range
+        x = (self._size - 1) * (ab[0] - a_min) / (a_max - a_min)
+        y = (self._size - 1) * (ab[1] - b_min) / (b_max - b_min)
+
+        return np.array([x, y])
 
     ## Create grid.
     def _createGrid(self):
@@ -123,7 +136,7 @@ class LabSlicePlot:
     #  @param num_ticks   number of ticks.
     def __init__(self, lab_slice, num_slices=51, num_ticks=10):
         self._lab_slice = lab_slice
-        self._img_plot = plt.imshow(lab_slice.slice(0))
+        self._img_plot = plt.imshow(lab_slice.slice(0)[0])
         font_size = 15
         self._L_txt = plt.text(0, -2, '', fontsize=font_size)
         self._num_slices = num_slices
@@ -135,13 +148,19 @@ class LabSlicePlot:
         self._aTicks()
         self._bTicks()
 
+    ## Plot.
+    def plot(self, L):
+        self._L_txt.set_text('L=%s' % L)
+        slice = self._lab_slice.slice(L)[0]
+        self._img_plot.set_array(slice)
+
     ## Animation function for matplot.
     def animationFunc(self, step, *args):
         L_id = step % self._num_slices
         L = self._Ls[L_id]
         self._L_txt.set_text('L=%s' % L)
 
-        slice = self._lab_slice.slice(L)
+        slice = self._lab_slice.slice(L)[0]
         self._img_plot.set_array(slice)
 
         return [self._L_txt, self._img_plot]
