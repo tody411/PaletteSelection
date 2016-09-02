@@ -2,7 +2,7 @@
 Automatic Color Palette Selection (Python)
 ====
 
-Simple python demos of Automatic Color Palette Selection [Garcia-Dorado et al. 2015].
+Simple python demos of Automatic Color Palette Selection [Chang et al. 2015].
 
 They proposed **palette-based photo recoloring** method for image editing.
 
